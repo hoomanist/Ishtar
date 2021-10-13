@@ -1,5 +1,5 @@
 #[derive(Clone)]
-struct Node {
+pub struct Node {
     next: Pointer,
     data: i32,
 }
@@ -31,7 +31,6 @@ impl Stack {
         dumped
 
     }
-    
     pub fn push(&mut self, data: i32) {
         let node: Node;
         // check whether it is first node or not
@@ -50,8 +49,12 @@ impl Stack {
         self.list.push(node.clone());
         self.head = Pointer::Pointy(Box::new(node));
     }
-    pub fn pop(&mut self) {
+    pub fn pop(&mut self) -> Node {
+        let current_haed = self.list[self.list.len() - 1].clone();
         self.list.pop();
+        let new_head = self.list[self.list.len() - 1].clone();
+        self.head = Pointer::Pointy(Box::new(new_head));
+        current_haed
     }
     
 }
@@ -79,11 +82,12 @@ mod tests {
         stack.push(1);
         stack.push(15);
         stack.push(42);
-        stack.pop();
+        let latest = stack.pop();
         let mut expected = Vec::new();
         expected.push(1);
         expected.push(15);
         assert_eq!(expected, stack.dump());
+        assert_eq!(latest.data, 42)
     }
 
 }
