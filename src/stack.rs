@@ -23,10 +23,13 @@ pub fn new_stack() -> Stack {
 }
 
 impl Stack {
-    pub fn dump(&mut self) {
+    pub fn dump(&mut self) -> Vec<i32> {
+        let mut dumped = Vec::new();
         for node in self.list.iter() {
-            println!("{}", node.data)
+            dumped.push(node.data);
         }
+        dumped
+
     }
     
     pub fn push(&mut self, data: i32) {
@@ -51,4 +54,36 @@ impl Stack {
         self.list.pop();
     }
     
+}
+
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_push() {
+        let mut stack = new_stack();
+        stack.push(1);
+        stack.push(15);
+        let mut expected = Vec::new();
+        expected.push(1);
+        expected.push(15);
+        assert_eq!(expected, stack.dump());
+    }
+
+    #[test]
+    fn test_pop() {
+        let mut stack = new_stack();
+        stack.push(1);
+        stack.push(15);
+        stack.push(42);
+        stack.pop();
+        let mut expected = Vec::new();
+        expected.push(1);
+        expected.push(15);
+        assert_eq!(expected, stack.dump());
+    }
+
 }
