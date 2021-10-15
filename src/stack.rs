@@ -29,6 +29,7 @@ impl Stack {
         let mut dumped = Vec::new();
         for node in self.list.iter() {
             dumped.push(node.data);
+            println!("{}", node.data);
         }
         dumped
 

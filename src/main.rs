@@ -63,5 +63,12 @@ mod tests {
         let mut stack = returned.stack;
         assert_eq!(stack.dump(), vec![0, 4]);
     }
+    #[test]
+    fn test_sub_instruct() {
+        let stack = stack::new_stack();
+        let returned = instructions::instruction_handler(stack, instructions::Instructions::SUB, vec![16, 4]);
+        let mut stack = returned.stack;
+        assert_eq!(stack.dump(), vec![0, 12]);
+    }
 }
 
