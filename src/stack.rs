@@ -37,6 +37,10 @@ impl Stack {
         let node: Node;
         // check whether it is first node or not
         if self.list.len() == 0 {
+            let initial_node = Node{
+                data: 0,
+            };
+            self.list.push(initial_node.clone());
             node = Node{
                 data: data,
             };
@@ -54,6 +58,7 @@ impl Stack {
         self.list.pop();
         let new_head = self.list[self.list.len() - 1].clone();
         self.stack_pointer = Pointer::Pointy(Box::new(new_head));
+        println!("{}", current_haed.data);
         current_haed
     }
     
