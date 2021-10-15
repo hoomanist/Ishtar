@@ -1,6 +1,5 @@
 #[derive(Clone)]
 pub struct Node {
-    next: Pointer,
     data: i32,
 }
 #[derive(Clone)]
@@ -39,13 +38,11 @@ impl Stack {
         // check whether it is first node or not
         if self.list.len() == 0 {
             node = Node{
-                next: Pointer::Empty,
                 data: data,
             };
         } else {
             let stack_pointer= self.stack_pointer.clone();
             node = Node{
-                next: stack_pointer,
                 data: data,
             };
         }
