@@ -1,6 +1,6 @@
 #[derive(Clone)]
 pub struct Node {
-    data: i32,
+    pub data: i32,
 }
 #[derive(Clone)]
 enum Pointer{
@@ -57,42 +57,5 @@ impl Stack {
         current_haed
     }
     
-}
-
-
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_push() {
-        let mut stack = new_stack();
-        stack.push(1);
-        stack.push(15);
-        let expected = vec![1, 15];
-        assert_eq!(expected, stack.dump());
-    }
-
-    #[test]
-    fn test_pop() {
-        let mut stack = new_stack();
-        stack.push(1);
-        stack.push(15);
-        stack.push(42);
-        stack.push(121);
-        assert_eq!(stack.pop().data, 121);
-        assert_eq!(stack.pop().data, 42);
-        let expected = vec![1, 15];
-        assert_eq!(expected, stack.dump());
-    }
-
-    #[test]
-    fn test_is_empty() {
-        let mut stack = new_stack();
-        assert_eq!(stack.is_empty(), true);
-        stack.push(42);
-        assert_eq!(stack.is_empty(), false);
-    }
 }
 
