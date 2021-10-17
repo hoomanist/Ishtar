@@ -72,8 +72,8 @@ fn sub_instruction(stack: stack_mod::Stack, operands: Vec<i32>) -> Return {
     } else {
         add_instruction(stack, vec![operands[0], -operands[1]])
     }
-
 }
+
 
 pub fn instruction_handler(stack: stack_mod::Stack, instruct: Instructions, operands: Vec<i32>) -> Return {
     match instruct {
