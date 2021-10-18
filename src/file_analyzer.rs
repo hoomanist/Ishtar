@@ -1,6 +1,6 @@
 use std::fs::*;
 use std::io;
-use std::error::Error;
+use std::path::Path;
 use super::*;
 
 pub struct Opcodes {
@@ -18,7 +18,8 @@ pub struct Parser {
 
 impl Parser {
     pub fn open(&mut self, path: &str) {
-        let opened_file = read_to_string(path).expect("file dosen't exist");
+        let absoulte_path = Path::new(path);
+        let opened_file = read_to_string(absoulte_path.canonicalize().unwrap()).expect("file dosen't exist");
         self.contents = Some(opened_file);
     }
     pub fn parse(&mut self) -> Vec<Opcodes> {
