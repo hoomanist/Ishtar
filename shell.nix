@@ -9,7 +9,7 @@ in
 pkgs.mkShell {
   buildInputs = [
     rust
-
+    pkgs.rust-analyzer
     # keep this line if you use bash
     pkgs.bashInteractive
   ];
