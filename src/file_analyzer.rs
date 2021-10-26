@@ -3,15 +3,17 @@ use std::io;
 use std::path::Path;
 use super::*;
 
+#[derive(Clone, Debug, PartialEq)]
 pub struct Opcodes {
     pub instruct: instructions::Instructions,
     pub oprands: Vec<i32>
 }
 
+#[derive(Debug)]
 pub struct ParsedFile {
     data: Vec<Opcodes>,
 }
-
+#[derive(Debug)]
 pub struct Parser {
     pub contents: Option<String>,
 }
@@ -37,12 +39,13 @@ impl Parser {
                 let mut operands = vec![];
                 let mut instruct = "";
                 for word in splited{
+                    println!("{}", index);
                     if index > 0 {
                         operands.push(word.parse::<i32>().unwrap());
-                        index += 1;
                     } else if index == 0 {
                         instruct = word;
                     }
+                    index = index + 1;
                 }
                 let instruct_formatted = match instruct {
                     "PSH" => instructions::Instructions::PSH,
@@ -61,12 +64,3 @@ impl Parser {
     }
 }
 
-pub fn handle_file(path: String) -> ParsedFile{
-    let mut parser = Parser{contents: None};
-    let parsed_data = parser.parse();
-    println!("{}", parser.contents.unwrap());
-    ParsedFile {
-        data: parsed_data,
-    }
-    
-}

@@ -5,3 +5,4 @@ authors = ["hoomanist <hham.group12@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+linefeed = "0.6"

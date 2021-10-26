@@ -1,5 +1,6 @@
 use crate::stack as stack_mod;
 
+#[derive(Clone, Debug, PartialEq)]
 pub enum Instructions {
     PSH,
     POP,

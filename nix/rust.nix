@@ -3,7 +3,7 @@
 let
   pkgs =
     import sources.nixpkgs { overlays = [ (import sources.nixpkgs-mozilla) ]; };
-  channel = "nightly";
+  channel = "beta";
   date = "2020-03-08";
   targets = [ ];
   chan = pkgs.rustChannelOfTargets channel date targets;
