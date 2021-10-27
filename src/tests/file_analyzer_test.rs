@@ -28,8 +28,5 @@ fn parse_test() {
             instruct: instructions::Instructions::SUB,
             oprands: vec![5, 3]
         },
-
-
-
     ])
 }

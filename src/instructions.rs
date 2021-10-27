@@ -8,75 +8,48 @@ pub enum Instructions {
     SUB,
 }
 
-
-pub struct Return {
-    pub returned: bool,
-    pub stack: stack_mod::Stack,
-}
-
-fn push_instruction(mut stack: stack_mod::Stack ,operands: Vec<i32>) -> Return {
+fn push_instruction(mut stack: stack_mod::Stack ,operands: Vec<i32>) -> (bool, stack_mod::Stack){
     if operands.len() == 1 {
         stack.push(operands[0]);
-        Return{
-            returned: true,
-            stack: stack,
-        }
+        (true, stack)
     } else {
-        Return{
-            returned: false,
-            stack: stack
-        }
+        (false, stack)
     }
 }
 
-fn pop_instruction(mut stack: stack_mod::Stack, operands: Vec<i32>) -> Return {
+fn pop_instruction(mut stack: stack_mod::Stack, operands: Vec<i32>) -> (bool, stack_mod::Stack) {
     if operands.len() == 0 {
         stack.pop();
-        Return {
-            returned: true,
-            stack: stack,
-        }
+        (true, stack)
     } else {
-        Return{
-            returned: false,
-            stack: stack
-        }
+        (false, stack)
     }
 
 }
 
-fn add_instruction(mut stack: stack_mod::Stack, operands: Vec<i32>) -> Return {
+fn add_instruction(mut stack: stack_mod::Stack, operands: Vec<i32>) -> (bool, stack_mod::Stack){
     if operands.len() != 2 {
-        Return{
-            returned: false,
-            stack: stack
-        }
+        (true, stack)
     } else {
         for operand in operands.iter() {
             stack.push(*operand);
         }
         let result = stack.pop().data + stack.pop().data;
         stack.push(result);
-        Return {
-            returned: true,
-            stack: stack,
-        }
+        (false, stack)
     }
 }
 
-fn sub_instruction(stack: stack_mod::Stack, operands: Vec<i32>) -> Return {
+fn sub_instruction(stack: stack_mod::Stack, operands: Vec<i32>) -> (bool, stack_mod::Stack){
     if operands.len() != 2 {
-        Return{
-            returned: false,
-            stack: stack
-        }
+        (false, stack)
     } else {
         add_instruction(stack, vec![operands[0], -operands[1]])
     }
 }
 
 
-pub fn instruction_handler(stack: stack_mod::Stack, instruct: Instructions, operands: Vec<i32>) -> Return {
+pub fn instruction_handler(stack: stack_mod::Stack, instruct: Instructions, operands: Vec<i32>) -> (bool, stack_mod::Stack){
     match instruct {
         Instructions::PSH => push_instruction(stack, operands),
         Instructions::POP => pop_instruction(stack, operands),
