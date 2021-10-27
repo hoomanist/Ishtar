@@ -39,7 +39,6 @@ impl Parser {
                 let mut operands = vec![];
                 let mut instruct = "";
                 for word in splited{
-                    println!("{}", index);
                     if index > 0 {
                         operands.push(word.parse::<i32>().unwrap());
                     } else if index == 0 {

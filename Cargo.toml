@@ -6,3 +6,4 @@ edition = "2018"
 
 [dependencies]
 linefeed = "0.6"
+argh = "0.1.6"
