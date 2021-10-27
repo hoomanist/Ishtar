@@ -10,6 +10,7 @@ pkgs.mkShell {
   buildInputs = [
     rust
     pkgs.rust-analyzer
+    pkgs.cargo-tarpaulin
     # keep this line if you use bash
     pkgs.bashInteractive
   ];
